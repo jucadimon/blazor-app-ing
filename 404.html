@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BlazorAppWeb-2026-ia</title>
+    <script>
+        // Ruta base automática: en tu PC es "/" y en GitHub Pages es "/<nombre-del-repositorio>/".
+        // Si cambias el nombre del repositorio, cambia solo la variable REPO.
+        (function () {
+            var REPO = '/blazor-app-ing/';
+            var enGitHubPages = location.hostname.endsWith('github.io');
+            var base = document.createElement('base');
+            base.href = enGitHubPages ? REPO : '/';
+            document.head.appendChild(base);
+        })();
+    </script>
+    <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/app.css" />
+    <link rel="icon" type="image/png" href="favicon.png" />
+    <link href="BlazorAppWeb-2026-ia.styles.css" rel="stylesheet" />
+
+    <script>
+        window.downloadFileFromBase64 = (fileName, byteBase64) => {
+            const link = document.createElement('a');
+            link.download = fileName;
+            link.href = 'data:application/octet-stream;base64,' + byteBase64;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        };
+    </script>
+
+</head>
+
+<body>
+    <div id="app">
+        <svg class="loading-progress">
+            <circle r="40%" cx="50%" cy="50%" />
+            <circle r="40%" cx="50%" cy="50%" />
+        </svg>
+        <div class="loading-progress-text"></div>
+    </div>
+
+    <div id="blazor-error-ui">
+        An unhandled error has occurred.
+        <a href="" class="reload">Reload</a>
+        <a class="dismiss">🗙</a>
+    </div>
+    <script src="_framework/blazor.webassembly.js"></script>
+</body>
+
+</html>
