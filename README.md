@@ -95,3 +95,32 @@ Dos pasos obligatorios para GitHub Pages:
 Crear .nojekyll: Agrega un archivo completamente vacío con el nombre .nojekyll en la raíz de tu repositorio de GitHub para evitar que borre carpetas internas de .NET (como _framework).
 
 Ajustar la etiqueta Base: En el index.html compilado, si tu repositorio en GitHub se llama mi-herramienta, debes cambiar <base href="/" /> por <base href="/mi-herramienta/" />.
+
+
+Ya casi está. Solo falta activar GitHub Pages en el repositorio.
+
+Activar la publicación
+Entra a tu repositorio en GitHub y abre Settings (Configuración), en la pestaña de arriba a la derecha.
+En el menú de la izquierda, pulsa Pages.
+En Build and deployment → Source, elige Deploy from a branch. Como subiste los archivos a mano, esta es la opción correcta, no “GitHub Actions”.
+En Branch, elige main (o master, la que uses) y en la carpeta elige / (root). Pulsa Save.
+Espera de 1 a 3 minutos y recarga la página de Pages. Arriba aparece un recuadro que dice “Your site is live at...” con el enlace.
+
+El enlace tiene esta forma, con tu usuario y el nombre del repositorio:
+
+https://TU-USUARIO.github.io/NOMBRE-DEL-REPOSITORIO/
+
+Mientras se publica, el recuadro muestra “Your site is being built”. También puedes ver el avance en la pestaña Actions, en una ejecución llamada “pages build and deployment”.
+
+Revisa antes de probar
+Los archivos deben estar en la raíz del repositorio. Al abrir el repositorio debes ver directamente index.html, 404.html, _framework, css, favicon.png y sample-data, y no una carpeta wwwroot que los contenga.
+El nombre del archivo debe ser exactamente .nojekyll. En tu mensaje lo escribiste como .nojekll (sin la “y”). Si el archivo quedó con ese nombre, GitHub lo ignora y la carpeta _framework no se publica. Si está mal escrito, bórralo y créalo de nuevo con el nombre correcto.
+El nombre del repositorio debe ser igual al de la variable REPO en el index.html (/blazor-app-ing/). Si tu repositorio se llama distinto, edita esa línea directamente en GitHub (icono del lápiz sobre index.html) y haz lo mismo en 404.html.
+Si creaste deploy.yml en .github/workflows/, bórralo. Con la publicación manual no se usa, y puede mostrar errores rojos en la pestaña Actions.
+Si algo falla
+Síntoma	Qué revisar
+Error 404 de GitHub al abrir el enlace	Aún no termina de publicarse (espera unos minutos), o index.html no está en la raíz del repositorio.
+Página en blanco	Abre la consola con F12. Si hay errores 404 en rojo, el nombre del repositorio no coincide con REPO, o falta .nojekyll con el nombre exacto.
+Muestra “Loading” mucho rato	La primera carga descarga el motor de .NET (varios MB) y puede tardar unos segundos. Es normal.
+La página muestra una versión vieja	Es la caché del navegador. Prueba con Ctrl + F5 o en una pestaña de incógnito.
+
